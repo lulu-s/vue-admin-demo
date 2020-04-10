@@ -1,0 +1,28 @@
+{
+  "name": "demo1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "echarts": "^4.7.0",
+    "element-ui": "^2.13.0",
+    "js-cookie": "^2.2.1",
+    "vue": "^2.6.11",
+    "vue-count-to": "^1.0.13",
+    "vue-router": "^3.1.6"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.1",
+    "less": "^3.11.1",
+    "sass": "^1.26.3",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
