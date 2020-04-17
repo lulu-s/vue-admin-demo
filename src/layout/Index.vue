@@ -137,6 +137,7 @@ export default {
 
 // mobile responsive
 .mobile {
+  
   .main-container {
     margin-left: 0px;
   }

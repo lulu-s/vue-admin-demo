@@ -26,7 +26,7 @@ const data = {
         {
             name: '🐼',
             ip: '192.168.1.30',
-            state: false
+            state: true
         }, 
         {
             name: '🦊',

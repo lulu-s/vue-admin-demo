@@ -55,6 +55,27 @@
   margin: 0 auto;
 }
 
+.mobile {
+  .el-dialog {
+    width: auto;
+  }
+
+  .el-dialog__body {
+    padding: 10px 20px 0 0;
+  }
+  
+  .el-dialog__footer {
+    padding: 0 20px 20px;
+  }
+
+  .el-form-item__label {
+    width: 80px!important;
+  }
+  .el-form-item__content {
+    margin-left:  80px!important;
+  }
+}
+
 // refine element ui upload
 .upload-container {
   .el-upload {
@@ -83,4 +104,5 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
 

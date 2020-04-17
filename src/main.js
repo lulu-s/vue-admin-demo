@@ -12,6 +12,11 @@ Vue.use(ElementUI);
 Vue.component("app", App);
 
 
+data.tableData.forEach(v => {
+  v.edit = false
+})
+
+
 Vue.config.productionTip = false;
 
 function vueRegisterAll(c) {

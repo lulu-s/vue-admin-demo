@@ -1,32 +1,73 @@
 <template>
   <div>
     <!-- v-waves -->
-    <div class="filter-container">
+    <div class="filter-container" >
       <el-input style="width: 200px;" v-model="search" placeholder="输入关键字搜索"></el-input>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
         Add
       </el-button>
-      <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
+      <el-button v-if="device!=='mobile'"  :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         Export
       </el-button>
     </div>
     <el-table
-      :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+      :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()) || data.ip.toLowerCase().includes(search.toLowerCase()) )"
       style="width: 100%">
-      <el-table-column label="Name" prop="name"></el-table-column>
-      <el-table-column label="Ip" prop="ip"></el-table-column>
+      <!-- <el-table-column label="Name" prop="name"> -->
+      <el-table-column label="Name">
+        <template slot-scope="{row}">
+          <template v-if="row.edit">
+            <el-input v-model="row.name" class="edit-input" size="small" />
+            <el-button
+              class="cancel-btn"
+              size="small"
+              icon="el-icon-refresh"
+              type="warning"
+              @click="cancelEdit(row)"
+            >
+              cancel
+            </el-button>
+          </template>
+          <span v-else>{{ row.name }}</span>
+        </template>  
+      </el-table-column>
+      <el-table-column label="Ip">
+        <template slot-scope="{row}">
+          <template v-if="row.edit">
+            <el-input v-model="row.ip" class="edit-input" size="small" />
+            <!-- <el-button
+              class="cancel-btn"
+              size="small"
+              icon="el-icon-refresh"
+              type="warning"
+              @click="cancelEdit(row)"
+            >
+              cancel
+            </el-button> -->
+          </template>
+          <span v-else>{{ row.ip }}</span>
+        </template>  
+      </el-table-column>
       <el-table-column
         label="State"
         prop="state">
         <template slot-scope="scope">
+          <!-- effect="dark" -->
           <el-tag :type="scope.row.state ? 'success' : 'info' ">
             {{ scope.row.state ? "上线" : "闲置" }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="Action">
+      <!-- fixed="right" -->
+      <el-table-column label="Action" >
         <template slot-scope="scope">
           <el-button
+            v-if="scope.row.edit"
+            size="mini"
+            type="success"
+            @click="confirmEdit(scope.$index, scope.row)">OK</el-button>
+          <el-button
+            v-else
             size="mini"
             type="primary"
             @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -47,12 +88,13 @@
       </el-table-column>
     </el-table>
 
+    <!-- 弹出框 -->
     <el-dialog title="Create" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="form">
-        <el-form-item label="name" prop="name" :label-width="formLabelWidth">
+        <el-form-item label="name" prop="name"  :label-width="formLabelWidth">
           <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="ip" prop="ip" :label-width="formLabelWidth">
+        <el-form-item label="ip" prop="ip"  :label-width="formLabelWidth">
             <el-input v-model="form.ip" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -66,8 +108,9 @@
 </template>
 
 <script>
-  import {tableData} from "../config/global.config"
+  import {tableData, device} from "../config/global.config"
   import {parseTime} from "../utils"
+  import ResizeMixin from "../utils/ResizeHandler.js" 
   export default {
     data() {
       var validateIp = (rule, value, callback) => {
@@ -96,9 +139,14 @@
           ip: '',
           state: false
         },
-        formLabelWidth: '120px'
+        formLabelWidth: '120px',
+        device
       }
     },
+    mounted(){
+      console.log(this.tableData[0].edit);
+    },
+    mixins: [ResizeMixin],
     filters: {
       statusFilter(status) {
         const statusMap = {
@@ -112,6 +160,15 @@
     methods: {
       handleEdit(index, row) {
         console.log(index, row);
+        this.tableData[index].edit = !this.tableData[index].edit;
+      },
+      confirmEdit(index, row) {
+        row.edit = false
+        this.tableData[index].name = row.name
+        this.$message({
+          message: 'The title has been edited',
+          type: 'success'
+        })
       },
       handleDelete(index, row) {
         // https://element.eleme.cn/#/zh-CN/component/notification
@@ -182,11 +239,26 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .filter-container {
     margin: 10px 0;
   }
   .filter-container > * {
     margin-left: 10px;
+  }
+
+  .mobile {
+    .el-button+.el-button {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    // .el-dialog {
+    //   width: auto;
+    // }
+
+    .el-table .cell {
+      word-break: normal;
+    }
   }
 </style>

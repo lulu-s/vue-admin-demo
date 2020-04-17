@@ -88,6 +88,22 @@
   margin: 0 auto;
 }
 
+.mobile .el-dialog {
+  width: auto;
+}
+.mobile .el-dialog__body {
+  padding: 10px 20px 0 0;
+}
+.mobile .el-dialog__footer {
+  padding: 0 20px 20px;
+}
+.mobile .el-form-item__label {
+  width: 80px !important;
+}
+.mobile .el-form-item__content {
+  margin-left: 80px !important;
+}
+
 .upload-container .el-upload {
   width: 100%;
 }
@@ -128,6 +144,23 @@ html {
 
 #app {
   height: 100%;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
 }
 .dashboard-editor-container[data-v-2bca06] {
   padding: 32px;
@@ -256,6 +289,13 @@ html {
 }
 .filter-container > *[data-v-d42ee6] {
   margin-left: 10px;
+}
+.mobile .el-button + .el-button[data-v-d42ee6] {
+  margin-top: 10px;
+  margin-left: 0;
+}
+.mobile .el-table .cell[data-v-d42ee6] {
+  word-break: normal;
 }
 @charset "UTF-8";
 .app-wrapper[data-v-f97e0b] {
@@ -527,37 +567,6 @@ html {
     float: none !important;
 }
 }
-.social-signup-container[data-v-e5e80e] {
-  margin: 20px 0;
-}
-.social-signup-container .sign-btn[data-v-e5e80e] {
-  display: inline-block;
-  cursor: pointer;
-}
-.social-signup-container .icon[data-v-e5e80e] {
-  color: #fff;
-  font-size: 24px;
-  margin-top: 8px;
-}
-.social-signup-container .wx-svg-container[data-v-e5e80e],
-.social-signup-container .qq-svg-container[data-v-e5e80e] {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  padding-top: 1px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  margin-right: 5px;
-}
-.social-signup-container .wx-svg-container[data-v-e5e80e] {
-  background-color: #24da70;
-}
-.social-signup-container .qq-svg-container[data-v-e5e80e] {
-  background-color: #6BA2D6;
-  margin-left: 50px;
-}
 /* 设置总导航的宽度 */
 .el-menu-vertical-demo:not(.el-menu--collapse) {
   width: 240px;
@@ -633,5 +642,36 @@ a:active {
 }
 .hideSidebar .logo img {
     max-width: 30px;
+}
+.social-signup-container[data-v-e5e80e] {
+  margin: 20px 0;
+}
+.social-signup-container .sign-btn[data-v-e5e80e] {
+  display: inline-block;
+  cursor: pointer;
+}
+.social-signup-container .icon[data-v-e5e80e] {
+  color: #fff;
+  font-size: 24px;
+  margin-top: 8px;
+}
+.social-signup-container .wx-svg-container[data-v-e5e80e],
+.social-signup-container .qq-svg-container[data-v-e5e80e] {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  padding-top: 1px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  margin-right: 5px;
+}
+.social-signup-container .wx-svg-container[data-v-e5e80e] {
+  background-color: #24da70;
+}
+.social-signup-container .qq-svg-container[data-v-e5e80e] {
+  background-color: #6BA2D6;
+  margin-left: 50px;
 }
 /*# sourceMappingURL=/main.1e43358e.css.map */
