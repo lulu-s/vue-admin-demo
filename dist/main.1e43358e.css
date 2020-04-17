@@ -287,6 +287,10 @@ div:focus {
 .upload-excel {
   margin-top: 10px;
 }
+
+.mobile .drop {
+  width: auto !important;
+}
 .filter-container[data-v-d42ee6] {
   margin: 10px 0;
 }
