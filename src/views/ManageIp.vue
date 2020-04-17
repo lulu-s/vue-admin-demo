@@ -3,6 +3,9 @@
     <!-- v-waves -->
     <div class="filter-container">
       <el-input style="width: 200px;" v-model="search" placeholder="输入关键字搜索"></el-input>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+        Add
+      </el-button>
       <el-button :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         Export
       </el-button>
@@ -10,14 +13,8 @@
     <el-table
       :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
       style="width: 100%">
-      <el-table-column
-        label="Date"
-        prop="date">
-      </el-table-column>
-      <el-table-column
-        label="Name"
-        prop="name">
-      </el-table-column>
+      <el-table-column label="Name" prop="name"></el-table-column>
+      <el-table-column label="Ip" prop="ip"></el-table-column>
       <el-table-column
         label="State"
         prop="state">
@@ -37,11 +34,11 @@
             size="mini"
             v-if="!scope.row.state"
             type="success"
-            @click="handleModifyStatus(scope.$index, true)">上线</el-button>
+            @click="handleModifyState(scope.$index, true)">上线</el-button>
           <el-button
             size="mini"
             v-if="scope.row.state"
-            @click="handleModifyStatus(scope.$index, false)">闲置</el-button>
+            @click="handleModifyState(scope.$index, false)">闲置</el-button>
           <el-button
             size="mini"
             type="danger"
@@ -49,6 +46,22 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog title="Create" :visible.sync="dialogFormVisible">
+      <el-form ref="dataForm" :rules="rules" :model="form">
+        <el-form-item label="name" prop="name" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="ip" prop="ip" :label-width="formLabelWidth">
+            <el-input v-model="form.ip" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="createData">确 定</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -57,10 +70,33 @@
   import {parseTime} from "../utils"
   export default {
     data() {
+      var validateIp = (rule, value, callback) => {
+        var pattern = /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/g;
+        if ( !pattern.test(value) ) {
+          return callback(new Error('请输入正确的 ip 地址'));
+        } else {
+          return callback();
+        }
+      };
       return {
         tableData,
         search: '',
-        downloadLoading: false
+        downloadLoading: false,
+        dialogFormVisible: false,
+        rules: {
+          name: [
+            {required: true, message: '请输入机器名称', trigger: 'blur'}
+          ],
+          ip: [
+            {required: true, validator: validateIp, trigger: 'blur'}
+          ]
+        },
+        form: {
+          name: '',
+          ip: '',
+          state: false
+        },
+        formLabelWidth: '120px'
       }
     },
     filters: {
@@ -90,8 +126,8 @@
       handleDownload() {
         this.downloadLoading = true
         import('../utils/Export2Excel').then(excel => {
-          const tHeader = ['date', 'name']
-          const filterVal = ['date', 'name']
+          const tHeader = ['name', 'ip', 'state']
+          const filterVal = ['name', 'ip', 'state']
           const data = this.formatJson(filterVal)
           excel.export_json_to_excel({
             header: tHeader,
@@ -110,14 +146,42 @@
           }
         }))
       },
-      handleModifyStatus(index, state) {
+      handleModifyState(index, state) {
         this.$message({
           message: '操作Success',
           type: 'success'
         })
         this.tableData[index].state = state;
-      }
-    },
+      },
+      handleCreate() {
+        this.resetTemp()
+        this.dialogFormVisible = true
+      },
+      resetTemp(){
+        this.form = {
+          name: '',
+          ip: '',
+          state: false
+        }
+      },
+      createData() {
+        console.log(1);
+        this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            this.tableData.unshift(this.form);
+            this.dialogFormVisible = false
+            this.$notify({
+              title: 'Success',
+              message: 'Created Successfully',
+              type: 'success',
+              duration: 2000
+            })
+          } else {
+            console.log(valid);
+          }
+        })
+      },
+    }
   }
 </script>
 

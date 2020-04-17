@@ -14,23 +14,23 @@ const data = {
     },
     tableData: [
         {
-            date: '2016-05-02',
-            name: '王小虎0',
+            name: '🐰',
+            ip: '192.168.1.10',
             state: false
         }, 
         {
-            date: '2016-05-04',
-            name: '王小虎1',
+            name: '🐯',
+            ip: '192.168.1.20',
             state: false
         }, 
         {
-            date: '2016-05-01',
-            name: '王小虎2',
+            name: '🐼',
+            ip: '192.168.1.30',
             state: false
         }, 
         {
-            date: '2016-05-03',
-            name: '王小虎3',
+            name: '🦊',
+            ip: '192.168.1.40',
             state: false
         }
     ],
