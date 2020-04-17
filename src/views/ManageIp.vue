@@ -165,7 +165,6 @@
         }
       },
       createData() {
-        console.log(1);
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.tableData.unshift(this.form);
@@ -176,8 +175,6 @@
               type: 'success',
               duration: 2000
             })
-          } else {
-            console.log(valid);
           }
         })
       },
