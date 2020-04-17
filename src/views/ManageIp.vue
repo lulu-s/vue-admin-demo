@@ -143,9 +143,6 @@
         device
       }
     },
-    mounted(){
-      console.log(this.tableData[0].edit);
-    },
     mixins: [ResizeMixin],
     filters: {
       statusFilter(status) {
@@ -159,14 +156,13 @@
     },
     methods: {
       handleEdit(index, row) {
-        console.log(index, row);
         this.tableData[index].edit = !this.tableData[index].edit;
       },
       confirmEdit(index, row) {
         row.edit = false
         this.tableData[index].name = row.name
         this.$message({
-          message: 'The title has been edited',
+          message: 'The name has been edited',
           type: 'success'
         })
       },

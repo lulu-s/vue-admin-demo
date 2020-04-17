@@ -284,6 +284,9 @@ div:focus {
     width: auto;
 }
 }
+.upload-excel {
+  margin-top: 10px;
+}
 .filter-container[data-v-d42ee6] {
   margin: 10px 0;
 }
@@ -673,5 +676,21 @@ a:active {
 .social-signup-container .qq-svg-container[data-v-e5e80e] {
   background-color: #6BA2D6;
   margin-left: 50px;
+}
+.excel-upload-input[data-v-aa58ff]{
+  display: none;
+  z-index: -9999;
+}
+.drop[data-v-aa58ff]{
+  border: 2px dashed #bbb;
+  width: 600px;
+  height: 160px;
+  line-height: 160px;
+  margin: 0 auto;
+  font-size: 24px;
+  border-radius: 5px;
+  text-align: center;
+  color: #bbb;
+  position: relative;
 }
 /*# sourceMappingURL=/main.1e43358e.css.map */
