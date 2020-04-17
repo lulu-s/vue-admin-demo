@@ -18,11 +18,30 @@
         label="Name"
         prop="name">
       </el-table-column>
-      <el-table-column label="Action" >
+      <el-table-column
+        label="State"
+        prop="state">
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.state ? 'success' : 'info' ">
+            {{ scope.row.state ? "上线" : "闲置" }}
+          </el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column label="Action">
         <template slot-scope="scope">
           <el-button
             size="mini"
+            type="primary"
             @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+          <el-button
+            size="mini"
+            v-if="!scope.row.state"
+            type="success"
+            @click="handleModifyStatus(scope.$index, true)">上线</el-button>
+          <el-button
+            size="mini"
+            v-if="scope.row.state"
+            @click="handleModifyStatus(scope.$index, false)">闲置</el-button>
           <el-button
             size="mini"
             type="danger"
@@ -42,6 +61,16 @@
         tableData,
         search: '',
         downloadLoading: false
+      }
+    },
+    filters: {
+      statusFilter(status) {
+        const statusMap = {
+          published: 'success',
+          draft: 'info',
+          deleted: 'danger'
+        }
+        return statusMap[status]
       }
     },
     methods: {
@@ -81,6 +110,13 @@
           }
         }))
       },
+      handleModifyStatus(index, state) {
+        this.$message({
+          message: '操作Success',
+          type: 'success'
+        })
+        this.tableData[index].state = state;
+      }
     },
   }
 </script>

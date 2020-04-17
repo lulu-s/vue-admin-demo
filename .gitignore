@@ -6,9 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 tests/**/coverage/
-.cache
+
 
 # Editor directories and files
+.cache
 .idea
 .vscode
 *.suo
