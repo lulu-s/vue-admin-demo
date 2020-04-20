@@ -1,54 +1,39 @@
 <template>
   <div>
     <div class="filter-container" >
-      <el-input style="width: 200px;" v-model="search" placeholder="输入关键字搜索"></el-input>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-input v-if="state.search" style="width: 200px;" v-model="search" placeholder="输入关键字搜索"></el-input>
+      <el-button v-if="state.add" class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
         Add
       </el-button>
-      <el-button v-if="device!=='mobile'"  :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
+      <el-button v-if="device!=='mobile' && state.upload"  :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         Export
       </el-button>
     </div>
+    
     <el-table
-      :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()) || data.ip.toLowerCase().includes(search.toLowerCase()) )"
+      border
+      :data="filter_data"
       style="width: 100%">
-      <!-- <el-table-column label="Name" prop="name"> -->
-      <el-table-column label="Name">
+
+      <el-table-column v-for="h in header" :key="h" :label="h">
         <template slot-scope="{row}">
-          <template v-if="row.edit">
-            <el-input v-model="row.name" class="edit-input" size="small" />
-            <el-button
-              class="cancel-btn"
-              size="small"
-              icon="el-icon-refresh"
-              type="warning"
-              @click="cancelEdit(row)"
-            >
-              cancel
-            </el-button>
+          <template v-if="h !== 'state'">
+            <template v-if="row.edit">
+              <el-input v-model="row[h]" class="edit-input" size="small" />
+            </template>
+            <span v-else>{{ row[h] }}</span>
           </template>
-          <span v-else>{{ row.name }}</span>
+
+          <!-- tag -->
+          <template v-else>
+            <!-- effect="dark" -->
+            <el-tag :type="row.state ? 'success' : 'info' ">
+              {{ row.state ? "上线" : "闲置" }}
+            </el-tag>
+          </template>
         </template>  
       </el-table-column>
-      <el-table-column label="Ip">
-        <template slot-scope="{row}">
-          <template v-if="row.edit">
-            <el-input v-model="row.ip" class="edit-input" size="small" />
-          </template>
-          <span v-else>{{ row.ip }}</span>
-        </template>  
-      </el-table-column>
-      <el-table-column
-        label="State"
-        prop="state">
-        <template slot-scope="scope">
-          <!-- effect="dark" -->
-          <el-tag :type="scope.row.state ? 'success' : 'info' ">
-            {{ scope.row.state ? "上线" : "闲置" }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <!-- fixed="right" -->
+
       <el-table-column label="Action" >
         <template slot-scope="scope">
           <el-button
@@ -63,12 +48,12 @@
             @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
           <el-button
             size="mini"
-            v-if="!scope.row.state"
+            v-if="!scope.row.state && state.state"
             type="success"
             @click="handleModifyState(scope.$index, true)">上线</el-button>
           <el-button
             size="mini"
-            v-if="scope.row.state"
+            v-if="scope.row.state && state.state"
             @click="handleModifyState(scope.$index, false)">闲置</el-button>
           <el-button
             size="mini"
@@ -80,13 +65,12 @@
 
     <!-- 弹出框 -->
     <el-dialog title="Create" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :rules="rules" :model="form">
-        <el-form-item label="name" prop="name"  :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+      <el-form ref="dataForm" :rules="state.rules" :model="form">
+
+        <el-form-item  v-for="h in header" :key="h + '_header'" v-if="h != 'state'"  :label="h" :prop="h" :label-width="formLabelWidth">
+            <el-input v-model="form[h]" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="ip" prop="ip"  :label-width="formLabelWidth">
-            <el-input v-model="form.ip" autocomplete="off"></el-input>
-        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -98,42 +82,19 @@
 </template>
 
 <script>
-  import {tableData, device} from "../config/global.config"
   import {parseTime} from "../utils"
-  import ResizeMixin from "../utils/ResizeHandler.js" 
   export default {
+    props: ['tableData', 'device', 'state'],
     data() {
-      var validateIp = (rule, value, callback) => {
-        var pattern = /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/g;
-        if ( !pattern.test(value) ) {
-          return callback(new Error('请输入正确的 ip 地址'));
-        } else {
-          return callback();
-        }
-      };
       return {
-        tableData,
         search: '',
         downloadLoading: false,
         dialogFormVisible: false,
-        rules: {
-          name: [
-            {required: true, message: '请输入机器名称', trigger: 'blur'}
-          ],
-          ip: [
-            {required: true, validator: validateIp, trigger: 'blur'}
-          ]
-        },
-        form: {
-          name: '',
-          ip: '',
-          state: false
-        },
+        form: {},
         formLabelWidth: '120px',
-        device
+        header: []
       }
     },
-    mixins: [ResizeMixin],
     filters: {
       statusFilter(status) {
         const statusMap = {
@@ -144,7 +105,24 @@
         return statusMap[status]
       }
     },
+    computed: {
+      filter_data () {
+        return this.tableData.filter(data => !this.search || data.name.toLowerCase().includes(this.search.toLowerCase()) || data.ip.toLowerCase().includes(this.search.toLowerCase()) )
+      }
+    },
+    mounted(){
+      this.getkey();
+    },
     methods: {
+      initForm(){
+        this.form = {}
+      },
+      getkey(){
+        for( let key in this.tableData[0] ) {
+          if(key == "edit") return;
+          this.header.push(key);
+        }
+      },
       handleEdit(index, row) {
         this.tableData[index].edit = !this.tableData[index].edit;
       },
@@ -169,11 +147,10 @@
       handleDownload() {
         this.downloadLoading = true
         import('../utils/Export2Excel').then(excel => {
-          const tHeader = ['name', 'ip', 'state']
-          const filterVal = ['name', 'ip', 'state']
+          const filterVal = this.header
           const data = this.formatJson(filterVal)
           excel.export_json_to_excel({
-            header: tHeader,
+            header: this.header,
             data,
             filename: 'table-list'
           })
@@ -197,19 +174,13 @@
         this.tableData[index].state = state;
       },
       handleCreate() {
-        this.resetTemp()
+        this.initForm();
         this.dialogFormVisible = true
-      },
-      resetTemp(){
-        this.form = {
-          name: '',
-          ip: '',
-          state: false
-        }
       },
       createData() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
+            this.$set(this.form, 'edit', false)
             this.tableData.unshift(this.form);
             this.dialogFormVisible = false
             this.$notify({

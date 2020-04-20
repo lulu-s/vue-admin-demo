@@ -102,8 +102,9 @@ export default {
     width: 100%;
     position: relative;
     overflow: hidden;
-    padding: 0 !important;
-    background-color: rgb(240, 242, 245);
+    padding: 0;
+    // background-color: rgb(240, 242, 245);
+    background-color: #fff;
     /* background: #ccc; */
     /* padding: 32px; */
   }

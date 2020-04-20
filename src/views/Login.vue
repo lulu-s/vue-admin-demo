@@ -84,18 +84,24 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+      this.userNum = validUsername(value);
+      if (validUsername(value) < 0) {
         callback(new Error('Please enter the correct user name'))
       } else {
+        this.userNum = validUsername(value);
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
+      this.passNum = validPassword(value);
       if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'))
-      } else if(!validPassword(value)){
+      } else if(validPassword(value) < 0){
         callback(new Error('Please enter the correct password'))
+      } else if (this.userNum != this.passNum){
+        callback(new Error('用户名或密码错误'))
       } else {
+        this.passNum = validPassword(value);
         callback()
       }
     }
@@ -164,8 +170,10 @@ export default {
           setToken(user);
           this.$router.push( '/Dashboard' )
           this.loading = false
-        } else {
-          this.loading = false
+          this.$message({
+            message: '登陆成功',
+            type: 'success'
+          })
         }
       })
     }

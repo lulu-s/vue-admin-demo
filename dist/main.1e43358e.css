@@ -162,6 +162,10 @@ a:hover {
 div:focus {
   outline: none;
 }
+
+.block {
+  padding: 10px 20px;
+}
 .dashboard-editor-container[data-v-2bca06] {
   padding: 32px;
   background-color: #f0f2f5;
@@ -291,17 +295,17 @@ div:focus {
 .mobile .drop {
   width: auto !important;
 }
-.filter-container[data-v-d42ee6] {
+.filter-container[data-v-d8fc64] {
   margin: 10px 0;
 }
-.filter-container > *[data-v-d42ee6] {
+.filter-container > *[data-v-d8fc64] {
   margin-left: 10px;
 }
-.mobile .el-button + .el-button[data-v-d42ee6] {
+.mobile .el-button + .el-button[data-v-d8fc64] {
   margin-top: 10px;
   margin-left: 0;
 }
-.mobile .el-table .cell[data-v-d42ee6] {
+.mobile .el-table .cell[data-v-d8fc64] {
   word-break: normal;
 }
 @charset "UTF-8";
@@ -344,8 +348,8 @@ div:focus {
   width: 100%;
   position: relative;
   overflow: hidden;
-  padding: 0 !important;
-  background-color: #f0f2f5;
+  padding: 0;
+  background-color: #fff;
   /* background: #ccc; */
   /* padding: 32px; */
 }
@@ -483,6 +487,13 @@ div:focus {
 }
 .avatar[data-v-eedfa0] {
   float: right;
+}
+.pagination-container[data-v-82f2f1] {
+  background: #fff;
+  padding: 32px 16px;
+}
+.pagination-container.hidden[data-v-82f2f1] {
+  display: none;
 }
 .panel-group[data-v-a6b415] {
   margin-top: 18px;
@@ -680,6 +691,19 @@ a:active {
 .social-signup-container .qq-svg-container[data-v-e5e80e] {
   background-color: #6BA2D6;
   margin-left: 50px;
+}
+.filter-container[data-v-fb3e65] {
+  margin: 10px 0;
+}
+.filter-container > *[data-v-fb3e65] {
+  margin-left: 10px;
+}
+.mobile .el-button + .el-button[data-v-fb3e65] {
+  margin-top: 10px;
+  margin-left: 0;
+}
+.mobile .el-table .cell[data-v-fb3e65] {
+  word-break: normal;
 }
 .excel-upload-input[data-v-aa58ff]{
   display: none;

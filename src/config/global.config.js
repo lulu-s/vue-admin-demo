@@ -12,7 +12,13 @@ const data = {
         username: "admin",
         password: "123456"
     },
-    tableData: [
+    userData: [
+        {
+            name: 'admin',
+            password: '123456'
+        }
+    ],
+    ipData: [
         {
             name: '🐰',
             ip: '192.168.1.10',
@@ -45,7 +51,7 @@ const data = {
             }
         },
         {
-            name: "账户管理",
+            name: "后台配置",
             id: "user",
             component: "user",
             icon: "el-icon-lollipop",
@@ -61,17 +67,17 @@ const data = {
                     component: "UserList",
                     meta: {
                         breadNum: 2,
-                        name: "账户管理"
+                        name: "后台配置"
                     },
                 },
                 {
-                    name: "个人管理",
+                    name: "其他管理",
                     id: "UserManage",
                     icon: def,
                     component: "UserManage",
                     meta: {
                         breadNum: 2,
-                        name: "账户管理"
+                        name: "后台配置"
                     }
                 },
                 
