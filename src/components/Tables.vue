@@ -63,6 +63,8 @@
       </el-table-column>
     </el-table>
 
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+
     <!-- 弹出框 -->
     <el-dialog title="Create" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="state.rules" :model="form">
@@ -92,7 +94,16 @@
         dialogFormVisible: false,
         form: {},
         formLabelWidth: '120px',
-        header: []
+        header: [],
+        list: null,
+        total: 0,
+        listQuery: {
+          page: 1,
+          limit: 10,
+          importance: undefined,
+          title: undefined,
+          type: undefined
+        }
       }
     },
     filters: {
@@ -107,13 +118,23 @@
     },
     computed: {
       filter_data () {
-        return this.tableData.filter(data => !this.search || data.name.toLowerCase().includes(this.search.toLowerCase()) || data.ip.toLowerCase().includes(this.search.toLowerCase()) )
+        let {limit, page} = this.listQuery
+        let data = this.tableData.filter(data => !this.search || data.name.toLowerCase().includes(this.search.toLowerCase()) || data.ip.toLowerCase().includes(this.search.toLowerCase()) )
+        this.total = data.length
+        return data.filter((item, index) => index < limit * page && index >= limit * (page - 1))
       }
     },
     mounted(){
       this.getkey();
+      this.total = this.tableData.length
+      // this.getList(this.tableData);
     },
     methods: {
+      getList() {
+        let {limit, page} = this.listQuery
+        this.list = this.tableData.filter((item, index) => index < limit * page && index >= limit * (page - 1))
+        return this.list
+      },
       initForm(){
         this.form = {}
       },

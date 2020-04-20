@@ -75,12 +75,14 @@ export default {
   },
   methods: {
     handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
       this.$emit('pagination', { page: this.currentPage, limit: val })
       if (this.autoScroll) {
         scrollTo(0, 800)
       }
     },
     handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
       this.$emit('pagination', { page: val, limit: this.pageSize })
       if (this.autoScroll) {
         scrollTo(0, 800)

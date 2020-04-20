@@ -15,8 +15,9 @@ Vue.component("app", App);
 [data.ipData, data.userData].forEach((v) => addEdit(v));
 
 function addEdit (c) {
-  c.forEach(v => {
+  c.forEach( (v, i) => {
     v.edit = false
+    v.id = i
   })
 }
 

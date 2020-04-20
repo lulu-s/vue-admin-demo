@@ -1,7 +1,7 @@
 <template>
   <div class="block">
     <tables :tableData="ipData" :device="device" :state="state_table"></tables>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <!-- <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" /> -->
   </div>
 </template>
 
@@ -28,17 +28,16 @@
             {required: true, validator: validateIp, trigger: 'blur'}
           ]
         },
-        device,
-        list: null,
-        total: 0,
-        listQuery: {
-          page: 1,
-          limit: 10,
-          importance: undefined,
-          title: undefined,
-          type: undefined,
-          sort: '+id'
-        },
+        device
+        // list: null,
+        // total: 0,
+        // listQuery: {
+        //   page: 1,
+        //   limit: 10,
+        //   importance: undefined,
+        //   title: undefined,
+        //   type: undefined
+        // },
       }
     },
     mixins: [ResizeMixin],
@@ -52,25 +51,17 @@
           state: true         // 状态tag
         }
       }
-    },
-    mounted(){
-      this.total = this.ipData.length
-    },
-    methods: {
-      getList() {
-        console.log(1);
-        this.listLoading = true
-        fetchList(this.listQuery).then(response => {
-          this.list = response.data.items
-          this.total = response.data.total
-
-          // Just to simulate the time of the request
-          setTimeout(() => {
-            this.listLoading = false
-          }, 1.5 * 1000)
-        })
-      }
     }
+    // mounted(){
+    //   this.total = this.ipData.length
+    //   this.getList();
+    // },
+    // methods: {
+    //   getList() {
+    //     let {limit, page} = this.listQuery
+    //     this.list = this.ipData.filter((item, index) => index < limit * page && index >= limit * (page - 1))
+    //   }
+    // }
   }
 </script>
 
