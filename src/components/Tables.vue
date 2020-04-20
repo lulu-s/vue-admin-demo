@@ -63,22 +63,20 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-
     <!-- 弹出框 -->
     <el-dialog title="Create" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="state.rules" :model="form">
-
         <el-form-item  v-for="h in header" :key="h + '_header'" v-if="h != 'state'"  :label="h" :prop="h" :label-width="formLabelWidth">
             <el-input v-model="form[h]" autocomplete="off"></el-input>
         </el-form-item>
-
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="createData">确 定</el-button>
       </div>
     </el-dialog>
+
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
   </div>
 </template>
@@ -195,6 +193,7 @@
         this.tableData[index].state = state;
       },
       handleCreate() {
+        console.log(12312);
         this.initForm();
         this.dialogFormVisible = true
       },
@@ -219,11 +218,11 @@
 
 <style lang="scss" scoped>
   .filter-container {
-    margin: 10px 0;
+    margin: 20px 0;
   }
-  .filter-container > * {
-    margin-left: 10px;
-  }
+  // .filter-container > * {
+  //   margin-left: 10px;
+  // }
 
   .mobile {
     .el-button+.el-button {

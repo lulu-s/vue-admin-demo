@@ -11,7 +11,6 @@
         
         <!-- unique-opened -->
         <el-menu
-        unique-opened 
           :default-active="default_active"
           router
           :collapse="state.opened"
