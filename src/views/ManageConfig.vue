@@ -37,9 +37,10 @@ export default {
       return false
     },
     handleSuccess({ results, header }) {
-      console.log(222);
       this.tableData = results
       this.tableHeader = header
+      // window.data.ipData.push(...results)
+      console.log(results, header);
     }
   }
 }

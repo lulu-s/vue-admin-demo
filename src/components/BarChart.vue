@@ -23,6 +23,10 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    chartData: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -73,28 +77,32 @@ export default {
             show: false
           }
         }],
-        series: [{
-          name: 'pageA',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [79, 52, 200, 334, 390, 330, 220],
-          animationDuration
-        }, {
-          name: 'pageB',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [80, 52, 200, 334, 390, 330, 220],
-          animationDuration
-        }, {
-          name: 'pageC',
-          type: 'bar',
-          stack: 'vistors',
-          barWidth: '60%',
-          data: [30, 52, 200, 334, 390, 330, 220],
-          animationDuration
-        }]
+        series: [
+          {
+            name: 'pageA',
+            type: 'bar',
+            stack: 'vistors',
+            barWidth: '60%',
+            data: this.chartData.data[0],
+            animationDuration
+          }, 
+          {
+            name: 'pageB',
+            type: 'bar',
+            stack: 'vistors',
+            barWidth: '60%',
+            data: this.chartData.data[1],//[80, 52, 200, 334, 390, 330, 220],
+            animationDuration
+          }, 
+          {
+            name: 'pageC',
+            type: 'bar',
+            stack: 'vistors',
+            barWidth: '60%',
+            data: this.chartData.data[2],//[30, 52, 200, 334, 390, 330, 220],
+            animationDuration
+          }
+        ]
       })
     }
   }

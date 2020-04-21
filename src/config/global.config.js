@@ -16,6 +16,10 @@ const data = {
         {
             name: 'admin',
             password: '123456'
+        },
+        {
+            name: 'user',
+            password: '000000'
         }
     ],
     ipData: [
@@ -38,247 +42,7 @@ const data = {
             name: '🦊',
             ip: '192.168.1.40',
             state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
-        {
-            name: '🐰',
-            ip: '192.168.1.10',
-            state: false
-        }, 
-        {
-            name: '🐯',
-            ip: '192.168.1.20',
-            state: false
-        }, 
-        {
-            name: '🐼',
-            ip: '192.168.1.30',
-            state: true
-        }, 
-        {
-            name: '🦊',
-            ip: '192.168.1.40',
-            state: false
-        },
+        }
     ],
     menu: [
         {
@@ -356,8 +120,7 @@ const data = {
             ]
         }
     ],
-    state: {
-        opened: false,
+    dashboard: {
         lineChartData: {
             newVisitis: {
               expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -375,7 +138,44 @@ const data = {
               expectedData: [130, 140, 141, 142, 145, 150, 160],
               actualData: [120, 82, 91, 154, 162, 140, 130]
             }
+        },
+        pieChartData: {
+            data: [
+                { value: 320, name: 'Industries' },
+                { value: 240, name: 'Technology' },
+                { value: 149, name: 'Forex' },
+                { value: 100, name: 'Gold' },
+                { value: 59, name: 'Forecasts' }
+            ],
+            header: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+        },
+        RaddarChart: {
+            data: [
+                {
+                  value: [5000, 7000, 12000, 11000, 15000, 14000],
+                  name: 'Allocated Budget'
+                },
+                {
+                  value: [4000, 9000, 15000, 15000, 13000, 11000],
+                  name: 'Expected Spending'
+                },
+                {
+                  value: [5500, 11000, 12000, 15000, 12000, 12000],
+                  name: 'Actual Spending'
+                }
+            ],
+            header: ['Allocated Budget', 'Expected Spending', 'Actual Spending']
+        },
+        BarChart: {
+            data: [
+                [79, 52, 200, 334, 390, 330, 220],
+                [80, 52, 200, 334, 390, 330, 220],
+                [30, 52, 200, 334, 390, 330, 220]
+            ]
         }
+    },
+    state: {
+        opened: false,
     }
 };
 window.data = data;

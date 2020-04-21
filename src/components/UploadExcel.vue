@@ -32,7 +32,6 @@ export default {
       this.excelData.header = header
       this.excelData.results = results
       this.onSuccess && this.onSuccess(this.excelData)
-      console.log(this.excelData);
     },
     handleDrop(e) {
       e.stopPropagation()

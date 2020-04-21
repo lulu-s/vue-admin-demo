@@ -193,7 +193,6 @@
         this.tableData[index].state = state;
       },
       handleCreate() {
-        console.log(12312);
         this.initForm();
         this.dialogFormVisible = true
       },

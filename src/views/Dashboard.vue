@@ -13,17 +13,17 @@
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <raddar-chart />
+          <raddar-chart :chart-data="RaddarChart"  />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <pie-chart />
+          <pie-chart :chart-data="pieChartData" />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <bar-chart />
+          <bar-chart :chart-data="BarChart"/>
         </div>
       </el-col>
     </el-row>
@@ -32,16 +32,20 @@
 
 <script>
 import { getToken } from "../utils/auth.js"
+import { dashboard } from "../config/global.config"
 export default {
   props: ["state"],
   data() {
     return {
-      lineChartData: window.data.state.lineChartData.newVisitis
+      lineChartData: dashboard.lineChartData.newVisitis,
+      pieChartData: dashboard.pieChartData,
+      RaddarChart: dashboard.RaddarChart,
+      BarChart: dashboard.BarChart
     }
   },
   methods: {
     handleSetLineChartData(type) {
-      this.lineChartData = window.data.state.lineChartData[type]
+      this.lineChartData = dashboard.lineChartData[type]
     }
   }
 }
