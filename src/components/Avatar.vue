@@ -6,7 +6,7 @@
             <router-link to="/Dashboard">
                 <el-dropdown-item>Dashboard</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="#">
+            <a target="_blank" :href="title.href">
                 <el-dropdown-item>Github</el-dropdown-item>
             </a>
             <a target="_blank" :href="title.href">
@@ -49,7 +49,6 @@ export default {
     .el-icon-arrow-down {
         font-size: 12px;
     }
-
     /* 点击头像去掉蓝框 */
     .el-avatar {
         outline: none;

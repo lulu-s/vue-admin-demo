@@ -176,7 +176,18 @@ const data = {
     },
     state: {
         opened: false,
-    }
+    },
+    testData: [
+        {
+            name: "1.json"
+        },
+        {
+            name: "2.json"
+        },
+        {
+            name: "3.json"
+        }
+    ]
 };
 window.data = data;
 module.exports = data;

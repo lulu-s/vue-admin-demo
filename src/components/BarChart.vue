@@ -85,13 +85,13 @@ export default {
             barWidth: '60%',
             data: this.chartData.data[0],
             animationDuration
-          }, 
+          },
           {
             name: 'pageB',
             type: 'bar',
             stack: 'vistors',
             barWidth: '60%',
-            data: this.chartData.data[1],//[80, 52, 200, 334, 390, 330, 220],
+            data: this.chartData.data[1],
             animationDuration
           }, 
           {
@@ -99,7 +99,7 @@ export default {
             type: 'bar',
             stack: 'vistors',
             barWidth: '60%',
-            data: this.chartData.data[2],//[30, 52, 200, 334, 390, 330, 220],
+            data: this.chartData.data[2],
             animationDuration
           }
         ]

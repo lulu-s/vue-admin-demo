@@ -43,6 +43,7 @@
             @click="confirmEdit(scope.$index, scope.row)">OK</el-button>
           <el-button
             v-else
+            v-show="scope.row.edit != undefined"
             size="mini"
             type="primary"
             @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
@@ -117,7 +118,14 @@
     computed: {
       filter_data () {
         let {limit, page} = this.listQuery
-        let data = this.tableData.filter(data => !this.search || data.name.toLowerCase().includes(this.search.toLowerCase()) || data.ip.toLowerCase().includes(this.search.toLowerCase()) )
+        let data = this.tableData.filter( data => {
+          let res = !this.search;
+          this.header.forEach(v=>{
+            res = res || data[v].toLowerCase().includes(this.search.toLowerCase())
+          })
+          return res;
+            // !this.search || data.name.toLowerCase().includes(this.search.toLowerCase()) || data.ip.toLowerCase().includes(this.search.toLowerCase()) 
+        })
         this.total = data.length
         return data.filter((item, index) => index < limit * page && index >= limit * (page - 1))
       }

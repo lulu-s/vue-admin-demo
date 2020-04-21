@@ -1,0 +1,18 @@
+{
+    "test": [
+        {
+            "username": "t1",
+            "email": "tes3t@gmail.com",
+            "hello": "asdf1",
+            "__timestamp": 1533382687232,
+            "__id": "8yecOgjou"
+        },
+        {
+            "username": "t2",
+            "email": "tes4t@gmail.com",
+            "hello": "asdf2",
+            "__timestamp": 1533382687231,
+            "__id": "FjoVPNcYY"
+        }
+    ]
+}
